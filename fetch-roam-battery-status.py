@@ -2,6 +2,7 @@ import soco
 import json
 import requests
 import xmltodict
+import time
 
 speaker_ip = ''
 for speaker in soco.discover():
@@ -22,5 +23,8 @@ json_data = {}
 for data in dict_data["ZPSupportInfo"]["LocalBatteryStatus"]["Data"]:
     json_data[data["@name"]] = data["#text"]
 
+json_data["time"] = time.time()
+
 with open("public/battery_data.json", "w") as outfile: 
     json.dump(json_data, outfile)
+
