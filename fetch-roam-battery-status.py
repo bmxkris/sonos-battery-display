@@ -3,6 +3,8 @@ import json
 import requests
 import xmltodict
 import time
+import pathlib
+
 
 speaker_ip = ''
 for speaker in soco.discover():
@@ -25,6 +27,6 @@ for data in dict_data["ZPSupportInfo"]["LocalBatteryStatus"]["Data"]:
 
 json_data["time"] = time.time()
 
-with open("public/battery_data.json", "w") as outfile: 
+with open(str(pathlib.Path(__file__).parent.resolve()) + "/public/battery_data.json", "w") as outfile:
     json.dump(json_data, outfile)
 
